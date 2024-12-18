@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    
+    <!-- Animate.css for animation effects -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+    <title>{% block title%} {% endblock %}</title>
+    <style>
+      {% block css %} {% endblock %}
+
+      /* Color Variables */
+      :root {
+        --primary-color: #2c3e50; /* Dark Blue */
+        --secondary-color: #27ae60; /* Soft Green */
+        --background-color: #ecf0f1; /* Light Gray */
+        --text-color: #ffffff; /* White */
+        --highlight-color: #2980b9; /* Blue Highlight */
+      }
+
+      /* Add background image and blur effect */
+      body {
+  background-image: url('/shop/images/ecom.jpg'); /* Replace with the actual image URL */
+  background-size: cover; /* Ensures the image covers the entire body */
+  background-position: center; /* Centers the image */
+  color: var(--primary-color); /* Sets the text color */
+  font-family: 'Arial', sans-serif;
+  position: relative; /* Allows the overlay and blur to be applied */
+  min-height: 100vh; /* Ensures body fills the entire screen height */
+}
+
+body::before {
+  content: ''; /* Create a pseudo-element */
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.5); /* Semi-transparent overlay */
+  backdrop-filter: blur(10px); /* Apply blur effect */
+  z-index: -1; /* Place it behind the content */
+}
+
+
+      /* Custom Animations */
+      .animate-navbar {
+        animation: fadeInDown 1s ease-in-out;
+      }
+
+      .animate-search {
+        animation: fadeIn 1s ease-in-out;
+      }
+
+      .animate-cart {
+        animation: bounceInUp 1s ease-in-out;
+      }
+
+      /* Keyframes for animations */
+      @keyframes fadeInDown {
+        0% { opacity: 0; transform: translateY(-50px); }
+        100% { opacity: 1; transform: translateY(0); }
+      }
+
+      @keyframes fadeIn {
+        0% { opacity: 0; }
+        100% { opacity: 1; }
+      }
+
+      @keyframes bounceInUp {
+        0% { transform: translateY(3000px); opacity: 0; }
+        60% { transform: translateY(-30px); opacity: 1; }
+        80% { transform: translateY(10px); }
+        100% { transform: translateY(0); }
+      }
+
+      /* Background and Color */
+      body {
+        background-color: var(--background-color);
+        color: var(--primary-color);
+        font-family: 'Arial', sans-serif;
+      }
+
+      nav.navbar {
+        background-color: var(--primary-color);
+      }
+
+      .navbar-brand, .nav-link {
+        color: var(--text-color) !important;
+      }
+
+      .navbar-nav .nav-link:hover {
+        color: var(--highlight-color) !important;
+      }
+
+      .form-control {
+        background-color: #ffffff;
+        border: 1px solid #ccc;
+      }
+
+      .btn-outline-success {
+        color: var(--secondary-color);
+        border-color: var(--secondary-color);
+      }
+
+      .btn-outline-success:hover {
+        background-color: var(--secondary-color);
+        color: #ffffff;
+      }
+
+      .btn-secondary {
+        background-color: var(--highlight-color);
+        color: #ffffff;
+        border: none;
+      }
+
+      .btn-secondary:hover {
+        background-color: #2980b9;
+      }
+
+      footer {
+        background-color: var(--primary-color);
+        color: var(--text-color);
+        padding: 20px 0;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark animate-navbar">
+      <a class="navbar-brand" href=" /">My Awesome Cart</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href=" /">Home <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/about">About Us</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/tracker">Tracker</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/contact">Contact Us</a>
+          </li>
+        </ul>
+        <form method='get' action=' search/' class="form-inline my-2 my-lg-0 animate-search">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search" id="search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+        <button type="button" class="btn btn-secondary mx-2 animate-cart" id="popcart" data-container="body" data-toggle="popover" data-placement="bottom" data-html="true" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
+          Cart(<span id="cart">0</span>)
+        </button>
+      </div>
+    </nav>
+
+    {% block body %} {% endblock %}
+
+    <!-- Footer -->
+    <footer>
+      <p>&copy; 2024 My Awesome Cart. Developed By Dev Raval.</p>
+    </footer>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+    
+    {% block js %} {% endblock %}
+  </body>
+</html>
